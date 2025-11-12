@@ -31,12 +31,17 @@ homicides_baltimore_loess <- homicides_baltimore %>%
   group_by(year_month) %>% 
   count()
 
+freddie_gray_arrest <- tibble(arrest_date = mdy('04-12-2015')) 
+
 homicides_baltimore_plot <- homicides_baltimore %>% 
   ggplot() +
   geom_bar(aes(x = year_month, fill = season)) + 
   geom_smooth(data = homicides_baltimore_loess, 
               aes(x = year_month, y = n), 
               method = 'loess', se = FALSE, span = 0.1) +
+  geom_vline(data = freddie_gray_arrest, 
+             aes(xintercept = arrest_date),
+             linetype = 2, linewidth = 1, color = 'red') +
   theme_dark() +
   labs(x = 'Date', y = 'Monthly homicides') + 
   ggtitle('Homicides in Baltimore, MD') +
