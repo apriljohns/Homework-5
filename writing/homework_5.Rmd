@@ -13,11 +13,15 @@ knitr::opts_chunk$set(echo = TRUE)
 list.files('../data')
 ```
 
-
 ```{r}
 library(tidyverse)
 
-homicides <- read_csv('../data/homicide-data.csv')
-```
+homicides_raw <- read_csv('../data/homicide-data.csv')
 
-# this is a test 
+homicides_baltimore <- homicides_raw %>% 
+  filter(city == 'Baltimore') %>% 
+  mutate(reported_date = ymd(reported_date),
+         month = month(reported_date),
+         season = if_else(month %in% c(11, 12, 1, 2, 3, 4), 
+                          'Winter','Summer'))
+```
