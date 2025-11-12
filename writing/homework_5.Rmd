@@ -29,5 +29,10 @@ homicides_baltimore <- homicides_raw %>%
 
 homicides_baltimore_plot <- homicides_baltimore %>% 
   ggplot() +
-  geom_bar(aes(x = year_month, fill = season))
+  geom_bar(aes(x = year_month, fill = season)) + 
+  theme_dark() +
+  labs(x = 'Date', y = 'Monthly homicides') + 
+  ggtitle('Homicides in Baltimore, MD') +
+  theme(legend.position = 'bottom',
+        legend.title =  element_blank())
 ```
