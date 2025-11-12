@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 list.files('../data')
 ```
 
-```{r}
+```{r fig.width = 10, fig.height = 3}
 library(tidyverse)
 
 homicides_raw <- read_csv('../data/homicide-data.csv')
@@ -27,9 +27,16 @@ homicides_baltimore <- homicides_raw %>%
          season = if_else(month %in% c(11, 12, 1, 2, 3, 4), 
                           'Winter','Summer'))
 
+homicides_baltimore_loess <- homicides_baltimore %>% 
+  group_by(year_month) %>% 
+  count()
+
 homicides_baltimore_plot <- homicides_baltimore %>% 
   ggplot() +
   geom_bar(aes(x = year_month, fill = season)) + 
+  geom_smooth(data = homicides_baltimore_loess, 
+              aes(x = year_month, y = n), 
+              method = 'loess', se = FALSE, span = 0.1) +
   theme_dark() +
   labs(x = 'Date', y = 'Monthly homicides') + 
   ggtitle('Homicides in Baltimore, MD') +
@@ -37,4 +44,6 @@ homicides_baltimore_plot <- homicides_baltimore %>%
         legend.title =  element_blank()) + 
   scale_fill_manual(values = c('Summer' = 'lightgrey', 
                                'Winter' = 'lightblue'))
+
+homicides_baltimore_plot
 ```
