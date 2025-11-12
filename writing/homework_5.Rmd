@@ -22,6 +22,12 @@ homicides_baltimore <- homicides_raw %>%
   filter(city == 'Baltimore') %>% 
   mutate(reported_date = ymd(reported_date),
          month = month(reported_date),
+         year = year(reported_date),
+         year_month = make_date(year, month),
          season = if_else(month %in% c(11, 12, 1, 2, 3, 4), 
                           'Winter','Summer'))
+
+homicides_baltimore_plot <- homicides_baltimore %>% 
+  ggplot() +
+  geom_bar(aes(x = year_month, fill = season))
 ```
