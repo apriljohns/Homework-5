@@ -42,6 +42,9 @@ homicides_baltimore_plot <- homicides_baltimore %>%
   geom_vline(data = freddie_gray_arrest, 
              aes(xintercept = arrest_date),
              linetype = 2, linewidth = 1, color = 'red') +
+  geom_text(data = freddie_gray_arrest, 
+            aes(x = arrest_date), y = 45,
+            label = "Arrest of Freddie Gray") + 
   theme_dark() +
   labs(x = 'Date', y = 'Monthly homicides') + 
   ggtitle('Homicides in Baltimore, MD') +
