@@ -17,7 +17,7 @@ list.files('../data')
 ```{r}
 library(tidyverse)
 
-homicides <- read_csv('data/homicide-data.csv')
+homicides <- read_csv('../data/homicide-data.csv')
 ```
 
 # this is a test 
