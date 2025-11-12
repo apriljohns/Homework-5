@@ -1,0 +1,21 @@
+---
+title: 'Homework #5'
+author: "April Johns"
+date: "2025-11-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+list.files('../data')
+```
+
+
+```{r}
+library(tidyverse)
+
+homicides <- read_csv('data/homicide-data.csv')
+```
