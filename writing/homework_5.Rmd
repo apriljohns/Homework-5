@@ -34,5 +34,7 @@ homicides_baltimore_plot <- homicides_baltimore %>%
   labs(x = 'Date', y = 'Monthly homicides') + 
   ggtitle('Homicides in Baltimore, MD') +
   theme(legend.position = 'bottom',
-        legend.title =  element_blank())
+        legend.title =  element_blank()) + 
+  scale_fill_manual(values = c('Summer' = 'lightgrey', 
+                               'Winter' = 'lightblue'))
 ```
